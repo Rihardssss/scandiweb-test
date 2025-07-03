@@ -61,10 +61,8 @@ body {
   left: 10px;
 }
 
+
 footer {
   text-align: center;
   padding: 15px;
-  border-top: 1px solid #ccc;
-  font-size: 13px;
-  color: #777;
-}
+  border-top: 1px solid
