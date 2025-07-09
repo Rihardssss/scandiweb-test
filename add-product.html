@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Add</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <form id="product_form">
+    <div class="page-header">
+      <h1>Product Add</h1>
+      <div class="header-buttons">
+        <button type="submit">Save</button>
+        <button type="button" onclick="window.location.href='index.html'">Cancel</button>
+      </div>
+    </div>
+
+    <div style="padding: 20px;">
+      <label for="sku">SKU</label><br />
+      <input type="text" id="sku" name="sku" required /><br /><br />
+
+      <label for="name">Name</label><br />
+      <input type="text" id="name" name="name" required /><br /><br />
+
+      <label for="price">Price ($)</label><br />
+      <input type="number" id="price" name="price" step="0.01" required /><br /><br />
+
+      <label for="productType">Type Switcher</label><br />
+      <select id="productType" name="productType" required>
+        <option value="">Select type</option>
+        <option value="DVD">DVD</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Book">Book</option>
+      </select><br /><br />
+
+      <div id="type-fields"></div>
+    </div>
+  </form>
+
+  <footer>
+    <p>Scandiweb Test assignment</p>
+  </footer>
+
+  <script>
+    const productType = document.getElementById('productType');
+    const typeFields = document.getElementById('type-fields');
+
+    productType.addEventListener('change', function () {
+      const type = this.value;
+      let html = '';
+
+      if (type === 'DVD') {
+        html = `
+          <label for="size">Size (MB)</label><br />
+          <input type="number" id="size" name="size" required /><br />
+          <p>Please provide size in MB.</p>
+        `;
+      } else if (type === 'Furniture') {
+        html = `
+          <label for="height">Height (CM)</label><br />
+          <input type="number" id="height" name="height" required /><br><br>
+          <label for="width">Width (CM)</label><br />
+          <input type="number" id="width" name="width" required /><br><br>
+          <label for="length">Length (CM)</label><br />
+          <input type="number" id="length" name="length" required /><br />
+          <p>Please provide dimensions in HxWxL format.</p>
+        `;
+      } else if (type === 'Book') {
+        html = `
+          <label for="weight">Weight (KG)</label><br />
+          <input type="number" id="weight" name="weight" required /><br />
+          <p>Please provide weight in KG.</p>
+        `;
+      }
+
+      typeFields.innerHTML = html;
+    });
+  </script>
+
+</body>
+</html>

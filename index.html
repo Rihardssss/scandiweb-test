@@ -1,41 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Product List</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <div class="page-header">
     <h1>Product List</h1>
     <div class="header-buttons">
-      <a href="add-product.html" id="add-product-btn">ADD</a>
-      <button id="delete-product-btn">MASS DELETE</button>
+      <button id="add-product-btn">ADD</button>
+      <button type="submit" form="product_list_form" id="delete-product-btn">MASS DELETE</button>
     </div>
   </div>
 
   <form id="product_list_form" method="POST" action="#">
     <div class="product-grid">
+
       <div class="product-item">
-        <input type="checkbox" class="delete-checkbox">
-        <p>JVC200123</p>
-        <p>Acme Movie</p>
-        <p>4.99 $</p>
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="AAA0001">
+        <p>AAA0001</p>
+        <p>Acme DISC</p>
+        <p>5.99 $</p>
         <p>Size: 700 MB</p>
       </div>
+
       <div class="product-item">
-        <input type="checkbox" class="delete-checkbox">
-        <p>BOOK123456</p>
-        <p>Clean Code</p>
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="BBB0002">
+        <p>BBB0002</p>
+        <p>War and Peace</p>
         <p>9.99 $</p>
-        <p>Weight: 1.2 KG</p>
-      </div>
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox">
-        <p>FURN001</p>
-        <p>Dining Table</p>
-        <p>149.99 $</p>
-        <p>Dimensions: 100x60x75 CM</p>
+        <p>Weight: 2KG</p>
       </div>
 
+      <div class="product-item">
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="CCC0003">
+        <p>CCC0003</p>
+        <p>Wooden Table</p>
+        <p>49.99 $</p>
+        <p>Dimension: 120x60x75</p>
+      </div>
+
+      <div class="product-item">
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="DDD0004">
+        <p>DDD0004</p>
+        <p>Storage DVD</p>
+        <p>4.00 $</p>
+        <p>Size: 470 MB</p>
+      </div>
+
+      <div class="product-item">
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="EEE0005">
+        <p>EEE0005</p>
+        <p>Book: Clean Code</p>
+        <p>14.50 $</p>
+        <p>Weight: 1.3KG</p>
+      </div>
+
+      <div class="product-item">
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="FFF0006">
+        <p>FFF0006</p>
+        <p>Office Chair</p>
+        <p>39.00 $</p>
+        <p>Dimension: 45x45x90</p>
+      </div>
+
+      <div class="product-item">
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="GGG0007">
+        <p>GGG0007</p>
+        <p>Kids Book</p>
+        <p>6.99 $</p>
+        <p>Weight: 0.9KG</p>
+      </div>
+
+      <div class="product-item">
+        <input type="checkbox" class="delete-checkbox" name="product[]" value="HHH0008">
+        <p>HHH0008</p>
+        <p>Gaming Desk</p>
+        <p>89.99 $</p>
+        <p>Dimension: 150x60x75</p>
+      </div>
+
+    </div>
+  </form>
+
+  <footer>
+    <p>Scandiweb Test assignment</p>
+  </footer>
+
+  <script>
+    document.getElementById('add-product-btn').addEventListener('click', function () {
+      window.location.href = 'add-product.html';
+    });
+  </script>
+
+</body>
+</html>
