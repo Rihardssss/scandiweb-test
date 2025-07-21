@@ -10,89 +10,94 @@
   <div class="page-header">
     <h1>Product List</h1>
     <div class="header-buttons">
-      <button id="add-product-btn">ADD</button>
+      <button id="add-product-btn" type="button">ADD</button>
       <button type="submit" form="product_list_form" id="delete-product-btn">MASS DELETE</button>
     </div>
   </div>
 
   <form id="product_list_form" method="POST" action="#">
-    <div class="product-grid">
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="AAA0001">
-        <p>AAA0001</p>
-        <p>Acme DISC</p>
-        <p>5.99 $</p>
-        <p>Size: 700 MB</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="BBB0002">
-        <p>BBB0002</p>
-        <p>War and Peace</p>
-        <p>9.99 $</p>
-        <p>Weight: 2KG</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="CCC0003">
-        <p>CCC0003</p>
-        <p>Wooden Table</p>
-        <p>49.99 $</p>
-        <p>Dimension: 120x60x75</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="DDD0004">
-        <p>DDD0004</p>
-        <p>Storage DVD</p>
-        <p>4.00 $</p>
-        <p>Size: 470 MB</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="EEE0005">
-        <p>EEE0005</p>
-        <p>Book: Clean Code</p>
-        <p>14.50 $</p>
-        <p>Weight: 1.3KG</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="FFF0006">
-        <p>FFF0006</p>
-        <p>Office Chair</p>
-        <p>39.00 $</p>
-        <p>Dimension: 45x45x90</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="GGG0007">
-        <p>GGG0007</p>
-        <p>Kids Book</p>
-        <p>6.99 $</p>
-        <p>Weight: 0.9KG</p>
-      </div>
-
-      <div class="product-item">
-        <input type="checkbox" class="delete-checkbox" name="product[]" value="HHH0008">
-        <p>HHH0008</p>
-        <p>Gaming Desk</p>
-        <p>89.99 $</p>
-        <p>Dimension: 150x60x75</p>
-      </div>
-
+    <div class="product-grid" id="product-grid">
     </div>
   </form>
 
   <footer>
-    <p>Scandiweb Test assignment</p>
+    <div>Scandiweb Test assignment</div>
   </footer>
 
   <script>
-    document.getElementById('add-product-btn').addEventListener('click', function () {
+    const addProductBtn = document.getElementById('add-product-btn');
+    const productGrid = document.getElementById('product-grid');
+    const productForm = document.getElementById('product_list_form');
+
+    addProductBtn.addEventListener('click', () => {
       window.location.href = 'add-product.html';
     });
+
+    const defaultProducts = [
+      { sku: "AAA0001", name: "Acme DISC", price: "5.99", type: "DVD", size: "700 MB" },
+      { sku: "BBB0002", name: "War and Peace", price: "9.99", type: "Book", weight: "2KG" },
+      { sku: "CCC0003", name: "Wooden Table", price: "49.99", type: "Furniture", dimensions: "120x60x75" },
+      { sku: "DDD0004", name: "Storage DVD", price: "4.00", type: "DVD", size: "470 MB" },
+      { sku: "EEE0005", name: "Book: Clean Code", price: "14.50", type: "Book", weight: "1.3KG" },
+      { sku: "FFF0006", name: "Office Chair", price: "39.00", type: "Furniture", dimensions: "45x45x90" },
+      { sku: "GGG0007", name: "Kids Book", price: "6.99", type: "Book", weight: "0.9KG" },
+      { sku: "HHH0008", name: "Gaming Desk", price: "89.99", type: "Furniture", dimensions: "150x60x75" }
+    ];
+
+    function getProducts() {
+      let products = JSON.parse(localStorage.getItem('products'));
+      if (!products || products.length === 0) {
+        products = defaultProducts;
+      }
+      return products;
+    }
+
+    function saveProducts(products) {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+
+    function createProductHTML(product) {
+      let spec = '';
+      if (product.type === 'DVD') spec = `Size: ${product.size}`;
+      else if (product.type === 'Book') spec = `Weight: ${product.weight}`;
+      else if (product.type === 'Furniture') spec = `Dimension: ${product.dimensions}`;
+
+      return `
+        <div class="product-item">
+          <input type="checkbox" class="delete-checkbox" name="product[]" value="${product.sku}">
+          <div>${product.sku}</div>
+          <div>${product.name}</div>
+          <div>${parseFloat(product.price).toFixed(2)} $</div>
+          <div>${spec}</div>
+        </div>
+      `;
+    }
+
+    function loadProducts() {
+      const products = getProducts();
+      if (products.length === 0) {
+        productGrid.innerHTML = '<div style="color:#ccc; text-align:center; width:100%;">No products available.</div>';
+        return;
+      }
+      productGrid.innerHTML = products.map(createProductHTML).join('');
+    }
+
+    productForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const checkedBoxes = [...document.querySelectorAll('.delete-checkbox:checked')];
+      if (checkedBoxes.length === 0) {
+        alert('Select products to delete.');
+        return;
+      }
+
+      let products = getProducts();
+      const toDelete = checkedBoxes.map(cb => cb.value);
+      products = products.filter(p => !toDelete.includes(p.sku));
+      saveProducts(products);
+      loadProducts();
+    });
+
+    loadProducts();
   </script>
 
 </body>
