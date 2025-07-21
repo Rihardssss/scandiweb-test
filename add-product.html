@@ -39,42 +39,95 @@
   </form>
 
   <footer>
-    <p>Scandiweb Test assignment</p>
+    <div>Scandiweb Test assignment</div>
   </footer>
 
   <script>
     const productType = document.getElementById('productType');
     const typeFields = document.getElementById('type-fields');
+    const productForm = document.getElementById('product_form');
 
-    productType.addEventListener('change', function () {
-      const type = this.value;
+    productType.addEventListener('change', () => {
       let html = '';
-
-      if (type === 'DVD') {
+      if (productType.value === 'DVD') {
         html = `
           <label for="size">Size (MB)</label><br />
-          <input type="number" id="size" name="size" required /><br />
-          <p>Please provide size in MB.</p>
+          <input type="number" id="size" name="size" min="0" required /><br />
+          <small>Please provide size in MB.</small>
         `;
-      } else if (type === 'Furniture') {
+      } else if (productType.value === 'Furniture') {
         html = `
           <label for="height">Height (CM)</label><br />
-          <input type="number" id="height" name="height" required /><br><br>
+          <input type="number" id="height" name="height" min="0" required /><br /><br />
           <label for="width">Width (CM)</label><br />
-          <input type="number" id="width" name="width" required /><br><br>
+          <input type="number" id="width" name="width" min="0" required /><br /><br />
           <label for="length">Length (CM)</label><br />
-          <input type="number" id="length" name="length" required /><br />
-          <p>Please provide dimensions in HxWxL format.</p>
+          <input type="number" id="length" name="length" min="0" required /><br />
+          <small>Please provide dimensions in HxWxL format.</small>
         `;
-      } else if (type === 'Book') {
+      } else if (productType.value === 'Book') {
         html = `
           <label for="weight">Weight (KG)</label><br />
-          <input type="number" id="weight" name="weight" required /><br />
-          <p>Please provide weight in KG.</p>
+          <input type="number" id="weight" name="weight" min="0" step="0.01" required /><br />
+          <small>Please provide weight in KG.</small>
         `;
       }
-
       typeFields.innerHTML = html;
+    });
+
+    function getProducts() {
+      let products = JSON.parse(localStorage.getItem('products'));
+      if (!products || !Array.isArray(products)) products = [];
+      return products;
+    }
+
+    function saveProducts(products) {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+
+    productForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const sku = document.getElementById('sku').value.trim();
+      const name = document.getElementById('name').value.trim();
+      const price = parseFloat(document.getElementById('price').value).toFixed(2);
+      const type = productType.value;
+      if (!sku || !name || !price || !type) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      const products = getProducts();
+      if (products.some(p => p.sku.toLowerCase() === sku.toLowerCase())) {
+        alert('SKU must be unique.');
+        return;
+      }
+      let productData = { sku, name, price, type };
+      if (type === 'DVD') {
+        const size = document.getElementById('size').value.trim();
+        if (!size) {
+          alert('Please enter size for DVD.');
+          return;
+        }
+        productData.size = size + ' MB';
+      } else if (type === 'Furniture') {
+        const height = document.getElementById('height').value.trim();
+        const width = document.getElementById('width').value.trim();
+        const length = document.getElementById('length').value.trim();
+        if (!height || !width || !length) {
+          alert('Please enter all dimensions for Furniture.');
+          return;
+        }
+        productData.dimensions = `${height}x${width}x${length}`;
+      } else if (type === 'Book') {
+        const weight = document.getElementById('weight').value.trim();
+        if (!weight) {
+          alert('Please enter weight for Book.');
+          return;
+        }
+        productData.weight = weight + ' KG';
+      }
+      products.push(productData);
+      saveProducts(products);
+      window.location.href = 'index.html';
     });
   </script>
 
