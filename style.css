@@ -3,80 +3,88 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom right, #1a1f2b, #2c3e50); 
-  color: white;
+  background: linear-gradient(to bottom right, #1a1f2b, #2c3e50);
+  color: #f5f5f5;
 }
 
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 24px;
   border-bottom: 1px solid #444;
   background: linear-gradient(to right, #2c3e50, #34495e);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 24px;
-  color: #f0f0f0;
+  font-size: 26px;
+  color: #f9f9f9;
+  letter-spacing: 1px;
 }
 
 .header-buttons {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 #add-product-btn,
 #delete-product-btn {
-  padding: 8px 16px;
-  background-color: #555;
+  padding: 10px 18px;
+  background-color: #444;
   color: white;
   border: none;
-  text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
 }
 
 #add-product-btn:hover,
 #delete-product-btn:hover {
-  background-color: #333;
+  background-color: #222;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 24px;
 }
 
 .product-item {
   position: relative;
-  border: 1px solid #555;
-  padding: 10px;
-  background-color: #1e1e1e;
+  border: 1px solid #666;
+  padding: 16px;
+  background-color: #202020;
   text-align: center;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.05);
-  color: #eee;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.06);
+  color: #f0f0f0;
+  border-radius: 6px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.08);
 }
 
 .delete-checkbox {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 12px;
+  left: 12px;
   transform: scale(1.2);
 }
 
 footer {
   text-align: center;
-  padding: 15px;
+  padding: 18px;
   border-top: 1px solid #444;
   background: linear-gradient(to right, #2c3e50, #34495e);
   font-size: 14px;
-  color: #ccc;
+  color: #bbb;
 }
