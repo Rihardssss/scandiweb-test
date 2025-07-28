@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Product Add</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-left">Product Add</div>
+    <div class="header-right">
+      <button type="submit" form="product_form">Save</button>
+      <button type="button" onclick="location.href='index.html'">Cancel</button>
+    </div>
+  </header>
+
+  <main>
+    <form id="product_form">
+      <label for="sku">SKU</label>
+      <input type="text" id="sku" name="sku" required />
+
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="price">Price ($)</label>
+      <input type="number" id="price" name="price" step="0.01" required />
+
+      <label for="productType">Type Switcher</label>
+      <select id="productType" name="productType" required>
+        <option value="">Select type</option>
+        <option value="DVD">DVD</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Book">Book</option>
+      </select>
+
+      <div id="type-fields"></div>
+    </form>
+  </main>
+
+  <footer>Scandiweb Test assignment</footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
+
