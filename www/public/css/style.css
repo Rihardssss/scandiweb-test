@@ -1,0 +1,116 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #1e3a8a;
+  color: #e0e7ff;
+}
+
+header {
+  background-color: #0c2461;
+  color: #e0e7ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  font-size: 1.4em;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-right {
+  font-weight: bold;
+}
+
+.header-right button,
+.header-left button.top-left-btn {
+  padding: 8px 18px;
+  background-color: #3b82f6;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.header-right button:hover,
+.header-left button.top-left-btn:hover {
+  background-color: #2563eb;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-item {
+  background: #27496d;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  color: #e0e7ff;
+  position: relative;
+}
+
+.product-item input[type="checkbox"] {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+footer {
+  background-color: #0c2461;
+  color: #e0e7ff;
+  text-align: center;
+  padding: 15px;
+  font-weight: bold;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  box-shadow: 0 -3px 6px rgba(0,0,0,0.3);
+}
+
+main {
+  padding: 20px;
+  max-width: 400px;
+  margin: 0;
+}
+
+form label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+  color: #cbd5e1;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 6px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 1em;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+  background-color: #2563eb;
+  outline: none;
+}

@@ -1,0 +1,21 @@
+{
+    "dataworkspace.excludedProjects": [
+        "enter/enter.sqlproj"
+    ],
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "192.168.56.10",
+            "port": 3306,
+            "driver": "MariaDB",
+            "username": "root",
+            "name": "Vagrant MySQL",
+            "password": "root",
+            "database": "scandiweb"
+        }
+    ]
+}
